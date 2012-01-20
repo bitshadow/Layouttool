@@ -1,0 +1,50 @@
+#ifndef KWPAGETOOL_H
+#define KWPAGETOOL_H
+
+#include <KoToolBase.h>
+
+class KWPageToolWidget;
+class KWCanvas;
+class KWDocument;
+
+class KWPageTool : public KoToolBase
+{
+    Q_OBJECT
+public:
+    explicit KWPageTool( KoCanvasBase *canvas );
+    virtual ~KWPageTool();
+
+public:
+    virtual void paint( QPainter &painter, const KoViewConverter &converter );
+
+public slots:
+    virtual void activate(ToolActivation toolActivation, const QSet<KoShape*> &shapes);
+
+public: // Events
+
+    virtual void mousePressEvent( KoPointerEvent *event );
+    virtual void mouseMoveEvent( KoPointerEvent *event );
+    virtual void mouseReleaseEvent( KoPointerEvent *event );
+//  virtual void mouseDoubleClickEvent( KoPointerEvent *event );
+
+//  virtual void keyPressEvent(QKeyEvent *event);
+
+private slots:
+    ///Force the remaining content on the page to next page.
+    void insertPageBreak();
+
+private:
+    KWCanvas *getCanvas() const;
+    KWDocument *getDocument() const;
+
+protected:
+    QList<QWidget *> createOptionWidgets();
+
+private:
+    KWPageToolWidget *m_widget;
+    KWCanvas *m_canvas;
+    KWDocument *m_document;
+};
+
+#endif
+

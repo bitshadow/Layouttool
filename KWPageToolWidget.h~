@@ -1,0 +1,23 @@
+#ifndef KWPAGETOOLWIDGET_H
+#define KWPAGETOOLWIDGET_H
+
+#include <QWidget>
+
+#include "ui_KWPageToolWidget.h"
+
+class KWPageToolWidget : public QWidget
+{
+    Q_OBJECT
+public:
+
+    KWPageToolWidget(QWidget *parent = 0);
+    ~KWPageToolWidget();
+
+signals:
+    void pageBreakClicked();
+    
+private:
+    Ui::KWPageToolWidget widget;
+};
+
+#endif // KWPAGETOOLWIDGET_H

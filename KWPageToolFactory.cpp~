@@ -1,0 +1,29 @@
+#include "KWPageToolFactory.h"
+#include "KWPageTool.h"
+#include <KoCanvasBase.h>
+
+#include <klocale.h>
+#include <kdebug.h>
+
+KWPageToolFactory::KWPageToolFactory()
+    : KoToolFactoryBase(PageToolId)
+{
+    setToolTip(i18n("Page tool"));
+    setToolType(mainToolType());
+    setPriority(40);
+    setActivationShapeId("flake/always");
+}
+
+KWPageToolFactory::~KWPageToolFactory()
+{
+}
+
+bool KWPageToolFactory::canCreateTool(KoCanvasBase *canvas) const
+{
+    return true;
+}
+
+KoToolBase* KWPageToolFactory::createTool(KoCanvasBase *canvas)
+{
+    return new KWPageTool(canvas);
+}
